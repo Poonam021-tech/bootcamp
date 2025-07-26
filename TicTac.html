@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elegant Tic Tac Toe</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .game-container {
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px 20px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #f7faff;
+      border: 2px solid #cfd8dc;
+      border-radius: 15px;
+      font-size: 36px;
+      color: #37474f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .cell:hover {
+      background-color: #e3f2fd;
+      transform: scale(1.05);
+    }
+
+    .status {
+      font-size: 18px;
+      color: #37474f;
+      margin-bottom: 15px;
+    }
+
+    .reset-btn {
+      padding: 10px 25px;
+      background-color: #7e57c2;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .reset-btn:hover {
+      background-color: #673ab7;
+    }
+
+    @media (max-width: 450px) {
+      .cell {
+        width: 80px;
+        height: 80px;
+        font-size: 28px;
+      }
+
+      .game-container {
+        padding: 20px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Tic Tac Toe</h1>
+    <div class="board" id="board"></div>
+    <div class="status" id="status">Player X's turn</div>
+    <button class="reset-btn" onclick="resetGame()">🔄 Reset</button>
+  </div>
+
+  <script>
+    const board = document.getElementById("board");
+    const statusText = document.getElementById("status");
+    let currentPlayer = "X";
+    let gameState = Array(9).fill("");
+    let gameActive = true;
+
+    const winCombos = [
+      [0,1,2], [3,4,5], [6,7,8],
+      [0,3,6], [1,4,7], [2,5,8],
+      [0,4,8], [2,4,6]
+    ];
+
+    function renderBoard() {
+      board.innerHTML = "";
+      gameState.forEach((value, idx) => {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.dataset.index = idx;
+        cell.textContent = value;
+        cell.addEventListener("click", handleClick);
+        board.appendChild(cell);
+      });
+    }
+
+    function handleClick(e) {
+      const index = e.target.dataset.index;
+      if (!gameActive || gameState[index]) return;
+
+      gameState[index] = currentPlayer;
+      renderBoard();
+      checkWinner();
+      currentPlayer = currentPlayer === "X" ? "O" : "X";
+
+      if (gameActive) {
+        statusText.textContent = `Player ${currentPlayer}'s turn`;
+      }
+    }
+
+    function checkWinner() {
+      for (const combo of winCombos) {
+        const [a, b, c] = combo;
+        if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
+          statusText.textContent = `🎉 Player ${gameState[a]} Wins!`;
+          gameActive = false;
+          return;
+        }
+      }
+
+      if (!gameState.includes("")) {
+        statusText.textContent = "🤝 It's a Draw!";
+        gameActive = false;
+      }
+    }
+
+    function resetGame() {
+      gameState = Array(9).fill("");
+      gameActive = true;
+      currentPlayer = "X";
+      renderBoard();
+      statusText.textContent = "Player X's turn";
+    }
+
+    renderBoard();
+  </script>
+</body>
+</html>
