@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Beautiful Student Table</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      padding: 40px 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #444;
+      margin-bottom: 30px;
+    }
+
+    .table-container {
+      max-width: 900px;
+      margin: auto;
+      overflow-x: auto;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #ffffff;
+      border-radius: 15px;
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: #6a11cb;
+      background-image: linear-gradient(315deg, #6a11cb 0%, #2575fc 74%);
+      color: white;
+    }
+
+    th, td {
+      padding: 14px 20px;
+      text-align: center;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tbody tr:hover {
+      background-color: #eef6ff;
+      cursor: pointer;
+    }
+
+    caption {
+      caption-side: top;
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    @media screen and (max-width: 600px) {
+      th, td {
+        padding: 10px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🌟 Student Performance Table 🌟</h2>
+
+  <div class="table-container">
+    <table>
+      <caption>Academic Year 2024–25</caption>
+      <thead>
+        <tr>
+          <th>Roll No.</th>
+          <th>Name</th>
+          <th>Course</th>
+          <th>Marks (%)</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>101</td>
+          <td>Poonam Rout</td>
+          <td>Computer Science</td>
+          <td>88.5</td>
+          <td>🎉 Pass</td>
+        </tr>
+        <tr>
+          <td>102</td>
+          <td>Debasmita Palai</td>
+          <td>Mechanical</td>
+          <td>72.0</td>
+          <td>✅ Pass</td>
+        </tr>
+        <tr>
+          <td>103</td>
+          <td>Vivek Patra</td>
+          <td>Electrical</td>
+          <td>59.0</td>
+          <td>✅ Pass</td>
+        </tr>
+        <tr>
+          <td>104</td>
+          <td>Meenakshi Rakesh</td>
+          <td>Civil</td>
+          <td>44.5</td>
+          <td>✅ Pass</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
